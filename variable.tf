@@ -64,7 +64,7 @@ locals {
   }]
 }
 
-# variable "enable_sg" {
-#   type = bool
-#   default = true
-# }
+variable "enable_sg" {
+  type = bool
+  default = false
+}
