@@ -23,11 +23,11 @@ variable "environment" {
   description = "The environment of instance"
 }
 
-variable "securityGroup" {
-  type = list(number)
-  default = [ 1,2,3,4 ]
-  description = "The list of sg for this instance"
-}
+# variable "securityGroup" {
+#   type = list(string)
+#   default = []
+#   description = "The list of sg for this instance"
+# }
 
 variable "instance_type" {
   type = list(string)

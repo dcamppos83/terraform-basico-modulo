@@ -44,7 +44,7 @@ resource "aws_instance" "web" {
     ami = data.aws_ami.ubuntu.id
     instance_type = count.index < 1 ? "t2.nano" : "t2.micro"
     #vpc_security_group_ids = var.securityGroup
-    vpc_security_group_ids = var.enable_sg ? aws_security_group.main[*].id : data.aws_security_group.default.id
+    vpc_security_group_ids = var.enable_sg ? aws_security_group.main[*].id : [data.aws_security_group.default.id] // o data retorna uma string, entao coloco entre [] para virar uma lista
 
     ebs_block_device {
       device_name = "/dev/sdg"
