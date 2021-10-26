@@ -12,6 +12,11 @@ variable "image_id" {
 
 #variable "servers" {}
 
+variable "name" {
+  type = string
+  default = "Descomplicando-Terraform"
+}
+
 variable "environment" {
   type = string
   default = "staging"
