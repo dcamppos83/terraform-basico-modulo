@@ -59,30 +59,30 @@ resource "aws_instance" "web" {
     }
 }
 
-resource "aws_instance" "web2" {
-    ami = data.aws_ami.ubuntu.id
-    for_each = toset(var.instance_type) // o toset transforma o conteúdo da variavel em um set
-    instance_type = each.value // neste caso posso usar o each.value ou o each.key
-    #instance_type = "t2.micro"
+# resource "aws_instance" "web2" {
+#     ami = data.aws_ami.ubuntu.id
+#     for_each = toset(var.instance_type) // o toset transforma o conteúdo da variavel em um set
+#     instance_type = each.value // neste caso posso usar o each.value ou o each.key
+#     #instance_type = "t2.micro"
 
-    dynamic "ebs_block_device" {
-      for_each = toset(var.blocks)
-      content {
-        device_name = ebs_block_device.value["device_name"]
-        volume_size = ebs_block_device.value["volume_size"]
-        volume_type = ebs_block_device.value["volume_type"]
-      }
-    }
+#     dynamic "ebs_block_device" {
+#       for_each = toset(var.blocks)
+#       content {
+#         device_name = ebs_block_device.value["device_name"]
+#         volume_size = ebs_block_device.value["volume_size"]
+#         volume_type = ebs_block_device.value["volume_type"]
+#       }
+#     }
 
-    # for_each = {
-    #   k1 = "dev"
-    #   k2 = "stg"
-    # }
+#     # for_each = {
+#     #   k1 = "dev"
+#     #   k2 = "stg"
+#     # }
 
-    # tags = {
-    #   "teste" = each.value
-    # }
-}
+#     # tags = {
+#     #   "teste" = each.value
+#     # }
+# }
 
 # resource "aws_instance" "web-west" {
 #     provider = aws.west
