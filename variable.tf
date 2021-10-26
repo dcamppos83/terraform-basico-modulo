@@ -59,7 +59,8 @@ variable "blocks" {
 }
 
 locals {
-  ingress_rules = [{
+  ingress_rules = [
+  {
     port = 443
     description = "Port 443"
   },
