@@ -63,3 +63,8 @@ locals {
     description = "Port 80"
   }]
 }
+
+# variable "enable_sg" {
+#   type = bool
+#   default = true
+# }

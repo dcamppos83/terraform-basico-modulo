@@ -2,6 +2,18 @@ data "aws_vpc" "main" {
   default = true
 }
 
+data "aws_security_group" "default" {
+  
+  filter {
+    name = "group-name"
+    values = ["default"]
+  }
+
+  tags = {
+    "produto" = "default"
+  }
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -32,6 +44,7 @@ resource "aws_instance" "web" {
     ami = data.aws_ami.ubuntu.id
     instance_type = count.index < 1 ? "t2.nano" : "t2.micro"
     vpc_security_group_ids = var.securityGroup
+    #vpc_security_group_ids = var.enable_sg ? var.securityGroup : data.aws_security_group.default
 
     ebs_block_device {
       device_name = "/dev/sdg"
@@ -83,7 +96,8 @@ resource "aws_instance" "web2" {
 # }
 
 resource "aws_security_group" "main" {
-  name = "teste-sg"
+  #count = var.enable_sg ? 1 : 0 //caso queira criar o SG
+  name = "allow-traffic-${var.name}"
   vpc_id = data.aws_vpc.main.id
 
   # ingress {
